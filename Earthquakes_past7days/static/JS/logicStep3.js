@@ -30,8 +30,16 @@ let map = L.map('mapid', {
   layers: [streets]
 });
 
+// Create the earthquake layer for our map.
+let earthquakes = new L.layerGroup();
+
+// This overlay will be visible all the time.
+let overlays = {
+  Earthquakes: earthquakes
+};
+
 // Pass our map layers into our layers control and add the layers control to the map.
-L.control.layers(baseMaps).addTo(map);
+L.control.layers(baseMaps, overlays).addTo(map);
 
 // Accessing the Earthquake GeoJSON URL
 let eqURL = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
@@ -57,8 +65,10 @@ function addMarkers(data){
     onEachFeature: function(feature, layer) {
       layer.bindPopup("Magnitude: " + feature.properties.mag + "<br>Location: " + feature.properties.place);
     }
-  }).addTo(map);
+  }).addTo(earthquakes);
 };
+
+earthquakes.addTo(map);
 
 // This function returns the style data for each of the earthquakes we plot on
 // the map. We pass the magnitude of the earthquake into two separate functions
