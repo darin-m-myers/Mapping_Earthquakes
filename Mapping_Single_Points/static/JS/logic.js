@@ -4,9 +4,9 @@ console.log("working");
 // Create the map object with a center and zoom level.
 let map = L.map("mapid", {
     center: [
-      40.7, -94.5
+      34.0522, -118.2437
     ],
-    zoom: 4
+    zoom: 16
   });
 
 // We create the tile layer that will be the background of our map.
@@ -14,12 +14,19 @@ let streets = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{
 attribution: 'Map data ©: <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery (c) <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
     accessToken: API_KEY,
-    id: "mapbox/streets-v11"
+    id: "mapbox/dark-v10"
 });
 
 // Then we add our 'graymap' tile layer to the map.
 streets.addTo(map);
 
-var marker = L.marker([38.811039, -94.927452], {draggable: false, title:"Portland"}).addTo(map);
+L.circleMarker([34.0522, -118.2437],{
+  raidus: 300,
+  color: "black",
+  fillColor: "#ffffa1",
+}).addTo(map);
 
-marker.bindPopup("Hello There Gardner!")
+
+// let marker = L.marker([34.0522, -118.2437]).addTo(map);
+
+// marker.bindPopup("Hello There Gardner!")
