@@ -4,7 +4,7 @@ console.log("working");
 // Create the map object with a center and zoom level.
 let map = L.map("mapid", {
     center: [
-      40.7, -94.5
+      37.09, -95.71
     ],
     zoom: 4
   });
@@ -14,12 +14,21 @@ let streets = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{
 attribution: 'Map data ©: <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery (c) <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
     accessToken: API_KEY,
-    id: "mapbox/streets-v11"
+    id: "mapbox/light-v10"
 });
 
 // Then we add our 'graymap' tile layer to the map.
 streets.addTo(map);
 
-var marker = L.marker([38.811039, -94.927452], {draggable: false, title:"Portland"}).addTo(map);
+// Coordinates for each point to be used in the polyline.
+let line = [
+  [37.6213, -122.3790],
+  [30.1975, -97.6664],
+  [43.6777, -79.6248],
+  [40.6413, -73.7781]
+];
 
-marker.bindPopup("Hello There Gardner!")
+// Create a polyline using the line coordinates and make the line yellow.
+L.polyline(line, {
+  color: "yellow"
+}).addTo(map);
